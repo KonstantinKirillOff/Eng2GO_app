@@ -11,6 +11,8 @@
 		B5D150E0278A00ED00C467AA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D150DF278A00ED00C467AA /* ContentView.swift */; };
 		B5D150E2278A00EF00C467AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D150E1278A00EF00C467AA /* Assets.xcassets */; };
 		B5D150E5278A00EF00C467AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D150E4278A00EF00C467AA /* Preview Assets.xcassets */; };
+		B5D150EC278A012F00C467AA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D150EB278A012F00C467AA /* Word.swift */; };
+		B5D150EE278A040400C467AA /* WordDescriptoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D150ED278A040400C467AA /* WordDescriptoinView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		B5D150DF278A00ED00C467AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5D150E1278A00EF00C467AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5D150E4278A00EF00C467AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B5D150EB278A012F00C467AA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		B5D150ED278A040400C467AA /* WordDescriptoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptoinView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +57,10 @@
 			children = (
 				B5D150DD278A00ED00C467AA /* Eng2GO_appApp.swift */,
 				B5D150DF278A00ED00C467AA /* ContentView.swift */,
+				B5D150ED278A040400C467AA /* WordDescriptoinView.swift */,
 				B5D150E1278A00EF00C467AA /* Assets.xcassets */,
 				B5D150E3278A00EF00C467AA /* Preview Content */,
+				B5D150EB278A012F00C467AA /* Word.swift */,
 			);
 			path = Eng2GO_app;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			files = (
 				B5D150E0278A00ED00C467AA /* ContentView.swift in Sources */,
 				B5D150DE278A00ED00C467AA /* Eng2GO_appApp.swift in Sources */,
+				B5D150EC278A012F00C467AA /* Word.swift in Sources */,
+				B5D150EE278A040400C467AA /* WordDescriptoinView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
