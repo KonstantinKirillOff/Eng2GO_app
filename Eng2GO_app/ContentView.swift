@@ -10,40 +10,53 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var addFormPresented = false
-    @State private var words = [Word]()
+    @State private var searchText = ""
+    @StateObject private var wordsList = WordList()
     
+    var searchResult: [Word] {
+        if searchText.isEmpty {
+            return wordsList.words
+        } else {
+            return wordsList.words.filter { $0.onEnglish.contains(searchText) }
+        }
+    }
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach($words) { $word in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            TextField("word", text: $word.onEnglish)
-                                .font(.title)
-                            TextField("перевод", text: $word.onRussian)
+            if #available(iOS 15.0, *) {
+                List {
+                    ForEach(searchResult) { word in
+                        HStack {
+                            if #available(iOS 15.0, *) {
+                                VStack(alignment: .leading) {
+                                    Text(word.onEnglish)
+                                        .font(.title)
+                                    Text(word.onRussian)
+                                }
+                                .onSubmit {
+                                    
+                                }
+                            } else {
+                                // Fallback on earlier versions
+                            }
                         }
-                        Spacer()
-                        if #available(iOS 15.0, *) {
-                            Toggle("Learned", isOn: $word.isLearned) .toggleStyle(.button)
-                        } else {
-                            Toggle("Learned", isOn: $word.isLearned)
-                                .toggleStyle(.switch)
+                    } .onDelete(perform: delete)
+                }
+                .searchable(text: $searchText)
+                .navigationTitle("My words")
+                .listStyle(.plain)
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: { addFormPresented.toggle() }) {
+                            Image(systemName: "plus")
                         }
-                    }
-                }.onDelete(perform: delete)
-            }
-            .navigationTitle("My words")
-            .listStyle(.plain)
-            .toolbar {
-                ToolbarItem {
-                    Button(action: { addFormPresented.toggle() }) {
-                        Image(systemName: "plus")
-                    }
-                    .sheet(isPresented: $addFormPresented) {
-                        WordDescriptoinView(isPresented: $addFormPresented, wordsList: $words)
+                        .sheet(isPresented: $addFormPresented) {
+                            WordDescriptoinView(isPresented: $addFormPresented, wordsList: wordsList)
+                        }
                     }
                 }
+            } else {
+                // Fallback on earlier versions
             }
         }
         .onAppear {
@@ -51,18 +64,19 @@ struct ContentView: View {
                 let decoder = JSONDecoder()
                 
                 if let words = try? decoder.decode([Word].self, from: wordsData as! Data) {
-                    self.words = words
+                    self.wordsList.words = words
                 }
             }
         }
     }
     
+    
     func delete(at offset: IndexSet) {
-        words.remove(atOffsets: offset)
+        wordsList.words.remove(atOffsets: offset)
         
         let encoder = JSONEncoder()
-
-        if let data = try? encoder.encode(words) {
+        
+        if let data = try? encoder.encode(wordsList.words) {
             UserDefaults.standard.set(data, forKey: "words")
         }
     }

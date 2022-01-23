@@ -13,7 +13,7 @@ struct WordDescriptoinView: View {
     @State private var rusName = ""
     
     @Binding var isPresented: Bool
-    @Binding var wordsList: [Word]
+    @ObservedObject var wordsList: WordList
     
     var body: some View {
         NavigationView {
@@ -26,11 +26,11 @@ struct WordDescriptoinView: View {
                 ToolbarItem {
                     Button(action: {
                         let newWord = Word(onEnglish: engName, onRussian: rusName)
-                        self.wordsList.append(newWord)
+                        self.wordsList.words.append(newWord)
                         
                         let encoder = JSONEncoder()
 
-                        if let data = try? encoder.encode(wordsList) {
+                        if let data = try? encoder.encode(wordsList.words) {
                             UserDefaults.standard.set(data, forKey: "words")
                         }
                         

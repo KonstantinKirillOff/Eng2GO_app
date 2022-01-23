@@ -14,3 +14,7 @@ struct Word: Identifiable, Codable {
     var onEnglish: String
     var onRussian: String
 }
+
+class WordList: ObservableObject {
+    @Published var words = [Word]()
+}
