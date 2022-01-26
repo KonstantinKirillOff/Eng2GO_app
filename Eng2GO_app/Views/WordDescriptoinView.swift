@@ -15,10 +15,17 @@ struct WordDescriptoinView: View {
     @Binding var isPresented: Bool
     @ObservedObject var wordsList: WordList
     
+    var initialEngName = ""
+    
     var body: some View {
         NavigationView {
             Form {
                 TextField("new word", text: $engName)
+                    .onAppear {
+                        if initialEngName != "" {
+                            engName = initialEngName
+                        }
+                    }
                 TextField("перевод", text: $rusName)
             }
             .navigationTitle("add word")

@@ -23,41 +23,40 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            if #available(iOS 15.0, *) {
-                List {
-                    ForEach(searchResult) { word in
-                        HStack {
-                            if #available(iOS 15.0, *) {
-                                VStack(alignment: .leading) {
-                                    Text(word.onEnglish)
-                                        .font(.title)
-                                    Text(word.onRussian)
-                                }
-                                .onSubmit {
-                                    
-                                }
-                            } else {
-                                // Fallback on earlier versions
-                            }
-                        }
-                    } .onDelete(perform: delete)
-                }
-                .searchable(text: $searchText)
-                .navigationTitle("My words")
-                .listStyle(.plain)
-                .toolbar {
-                    ToolbarItem {
-                        Button(action: { addFormPresented.toggle() }) {
-                            Image(systemName: "plus")
-                        }
-                        .sheet(isPresented: $addFormPresented) {
-                            WordDescriptoinView(isPresented: $addFormPresented, wordsList: wordsList)
+            VStack {
+                HStack {
+                    SearchBarView(searchWord: $searchText)
+                    if searchText != "" {
+                        Button {
+                            searchText = ""
+                        } label: {
+                            Image(systemName: "x.circle.fill")
+                                .font(.title)
                         }
                     }
+                    Button(action: { addFormPresented.toggle() }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title)
+                    }
+                    .sheet(isPresented: $addFormPresented) {
+                        WordDescriptoinView(isPresented: $addFormPresented, wordsList: wordsList, initialEngName: searchText)
+                    }
                 }
-            } else {
-                // Fallback on earlier versions
+                
+            List {
+                ForEach(searchResult, id: \.onEnglish) { word in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(word.onEnglish)
+                                .font(.title)
+                            Text(word.onRussian)
+                        }
+                    }
+                } .onDelete(perform: delete)
             }
+            .navigationTitle("My words")
+            .listStyle(.plain)
+        }.padding(.horizontal, 15)
         }
         .onAppear {
             if let wordsData = UserDefaults.standard.value(forKey: "words") {
@@ -68,11 +67,12 @@ struct ContentView: View {
                 }
             }
         }
+        
     }
-    
-    
+        
+        
     func delete(at offset: IndexSet) {
-        wordsList.words.remove(atOffsets: offset)
+        self.wordsList.words.remove(atOffsets: offset)
         
         let encoder = JSONEncoder()
         
@@ -81,9 +81,10 @@ struct ContentView: View {
         }
     }
 }
-
+    
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
