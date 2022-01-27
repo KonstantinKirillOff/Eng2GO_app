@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var addFormPresented = false
+    @State private var showCancelButton = false
     @State private var searchText = ""
+    
     @StateObject private var wordsList = WordList()
     
     var searchResult: [Word] {
@@ -25,10 +27,14 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 HStack {
-                    SearchBarView(searchWord: $searchText)
-                    if searchText != "" {
+                    SearchBarView(searchWord: $searchText, showCancelButton: $showCancelButton)
+                    if searchText != "" || showCancelButton {
                         Button {
+                            withAnimation {
+                                showCancelButton = false
+                            }
                             searchText = ""
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         } label: {
                             Image(systemName: "x.circle.fill")
                                 .font(.title)
@@ -38,7 +44,7 @@ struct ContentView: View {
                         Image(systemName: "plus.circle.fill")
                             .font(.title)
                     }
-                    .sheet(isPresented: $addFormPresented) {
+                    .fullScreenCover(isPresented: $addFormPresented) {
                         WordDescriptoinView(isPresented: $addFormPresented, wordsList: wordsList, initialEngName: searchText)
                     }
                 }
