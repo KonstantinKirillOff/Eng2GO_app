@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+protocol UpdateList {
+    func updateList(eng: String, rus: String)
+}
+
 struct ContentView: View {
     
-    @State private var addFormPresented = false
     @State private var showCancelButton = false
     @State private var searchText = ""
     
@@ -34,49 +37,46 @@ struct ContentView: View {
                                 showCancelButton = false
                             }
                             searchText = ""
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            hideKeyboard()
                         } label: {
                             Image(systemName: "x.circle.fill")
                                 .font(.title)
                         }
                     }
-                    Button(action: { addFormPresented.toggle() }) {
-                        Image(systemName: "plus.circle.fill")
-                            .font(.title)
-                    }
-                    .fullScreenCover(isPresented: $addFormPresented) {
-                        WordDescriptoinView(isPresented: $addFormPresented, wordsList: wordsList, initialEngName: searchText)
-                    }
-                }
-                
-            List {
-                ForEach(searchResult, id: \.onEnglish) { word in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(word.onEnglish)
+                    NavigationLink(destination: WordDescriptoinView(
+                        wordsList: wordsList,
+                        initialEngName: searchText,
+                        initialRusName: "")
+                                    .navigationBarBackButtonHidden(true)) {
+                            Image(systemName: "plus.circle.fill")
                                 .font(.title)
-                            Text(word.onRussian)
+                    }
+                }.padding(.horizontal)
+                List {
+                    ForEach(searchResult, id: \.onEnglish) { word in
+                        NavigationLink(destination: WordDescriptoinView(
+                                                    wordsList: wordsList,
+                                                    initialEngName: word.onEnglish,
+                                                    initialRusName: word.onRussian)
+                                                        .navigationBarBackButtonHidden(true)) {
+                            VStack(alignment: .leading) {
+                                Text(word.onEnglish)
+                                    .font(.title)
+                                Text(word.onRussian)
+                            }
                         }
                     }
-                } .onDelete(perform: delete)
+                    .onDelete(perform: delete)
+                }
+                .listStyle(.plain)
+                .navigationTitle("My words")
             }
-            .navigationTitle("My words")
-            .listStyle(.plain)
-        }.padding(.horizontal, 15)
         }
         .onAppear {
-            if let wordsData = UserDefaults.standard.value(forKey: "words") {
-                let decoder = JSONDecoder()
-                
-                if let words = try? decoder.decode([Word].self, from: wordsData as! Data) {
-                    self.wordsList.words = words
-                }
-            }
+            update()
         }
-        
     }
-        
-        
+    
     func delete(at offset: IndexSet) {
         self.wordsList.words.remove(atOffsets: offset)
         
@@ -86,6 +86,16 @@ struct ContentView: View {
             UserDefaults.standard.set(data, forKey: "words")
         }
     }
+    
+    func update() {
+        if let wordsData = UserDefaults.standard.value(forKey: "words") {
+            let decoder = JSONDecoder()
+            
+            if let words = try? decoder.decode([Word].self, from: wordsData as! Data) {
+                self.wordsList.words = words
+            }
+        }
+    }
 }
     
 struct ContentView_Previews: PreviewProvider {
@@ -93,4 +103,11 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 
