@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Eng2GO_appApp: App {
+    @StateObject var wordData = WordViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(wordData)
         }
     }
 }

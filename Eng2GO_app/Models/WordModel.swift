@@ -11,19 +11,14 @@ struct Word: Codable {
     var isLearned = false
     var onEnglish: String
     var onRussian: String
+    var transcription = ""
+}
+
+struct WordGroup: Identifiable {
+    var id = UUID()
+    var name: String
+    var wordList: [Word]
 }
 
 
-class WordList: ObservableObject {
-    @Published var words = [Word]()
-    
-    func searchWord(by engName: String) -> Word? {
-        var findingWord: Word!
-        for word in words {
-            if word.onEnglish == engName.uppercased() {
-                findingWord = word
-            }
-        }
-        return findingWord
-    }
-}
+

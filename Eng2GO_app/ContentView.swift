@@ -12,11 +12,12 @@ protocol UpdateList {
 }
 
 struct ContentView: View {
+    @EnvironmentObject var wordData: WordViewModel
     
     @State private var showCancelButton = false
     @State private var searchText = ""
     
-    @StateObject private var wordsList = WordList()
+    @StateObject private var wordsList = WordViewModel()
     
     var searchResult: [Word] {
         if searchText.isEmpty {
@@ -43,11 +44,10 @@ struct ContentView: View {
                                 .font(.title)
                         }
                     }
-                    NavigationLink(destination: WordDescriptoinView(
-                        wordsList: wordsList,
-                        initialEngName: searchText,
-                        initialRusName: "")
-                                    .navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination:WordDescriptoinView(
+                                               initialEngName: searchText,
+                                               initialRusName: "")
+                                                    .navigationBarBackButtonHidden(true)) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title)
                     }
@@ -55,7 +55,6 @@ struct ContentView: View {
                 List {
                     ForEach(searchResult, id: \.onEnglish) { word in
                         NavigationLink(destination: WordDescriptoinView(
-                                                    wordsList: wordsList,
                                                     initialEngName: word.onEnglish,
                                                     initialRusName: word.onRussian)
                                                         .navigationBarBackButtonHidden(true)) {
@@ -71,9 +70,10 @@ struct ContentView: View {
                 .listStyle(.plain)
                 .navigationTitle("My words")
             }
-        }
-        .onAppear {
-            update()
+            .onAppear {
+                update()
+            }
+            
         }
     }
     
