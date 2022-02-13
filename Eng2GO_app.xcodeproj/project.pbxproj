@@ -18,6 +18,8 @@
 		FF8675B327AFDCC500DB1F70 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */; };
 		FF8675B727AFDECB00DB1F70 /* WordGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B627AFDECB00DB1F70 /* WordGroupListView.swift */; };
 		FF8675B927AFE39900DB1F70 /* EditWordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B827AFE39900DB1F70 /* EditWordGroupView.swift */; };
+		FFB4724B27B975FA00AE3A22 /* WordsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */; };
+		FFB4724D27B9771600AE3A22 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB4724C27B9771600AE3A22 /* NetworkManager.swift */; };
 		FFE93A3127A066880075A979 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE93A3027A066880075A979 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		FF8675B627AFDECB00DB1F70 /* WordGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordGroupListView.swift; sourceTree = "<group>"; };
 		FF8675B827AFE39900DB1F70 /* EditWordGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordGroupView.swift; sourceTree = "<group>"; };
+		FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewModel.swift; sourceTree = "<group>"; };
+		FFB4724C27B9771600AE3A22 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FFE93A3027A066880075A979 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +74,7 @@
 			children = (
 				B5D150DD278A00ED00C467AA /* Eng2GO_appApp.swift */,
 				B5D150DF278A00ED00C467AA /* ContentView.swift */,
+				FFB4724E27B9773300AE3A22 /* Service */,
 				FF5175A0279D77D4004BD982 /* Views */,
 				FF51759F279D77CA004BD982 /* Models */,
 				B5D150E1278A00EF00C467AA /* Assets.xcassets */,
@@ -91,6 +96,7 @@
 			children = (
 				B5D150EB278A012F00C467AA /* WordModel.swift */,
 				FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */,
+				FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -105,6 +111,14 @@
 				FF4E339327AFF42600A42F07 /* WordForTraningView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FFB4724E27B9773300AE3A22 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FFB4724C27B9771600AE3A22 /* NetworkManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +195,8 @@
 				FF8675B727AFDECB00DB1F70 /* WordGroupListView.swift in Sources */,
 				FF8675B327AFDCC500DB1F70 /* WordViewModel.swift in Sources */,
 				FF74D43927A1239000C51519 /* SearchBarView.swift in Sources */,
+				FFB4724B27B975FA00AE3A22 /* WordsListViewModel.swift in Sources */,
+				FFB4724D27B9771600AE3A22 /* NetworkManager.swift in Sources */,
 				B5D150E0278A00ED00C467AA /* ContentView.swift in Sources */,
 				FF4E339427AFF42600A42F07 /* WordForTraningView.swift in Sources */,
 				FF8675B927AFE39900DB1F70 /* EditWordGroupView.swift in Sources */,
