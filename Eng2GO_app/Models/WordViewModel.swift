@@ -8,30 +8,20 @@
 import SwiftUI
 
 class WordViewModel: ObservableObject {
-    @Published var words = [Word]()
-   
-    @Published var groups: [WordGroup] = [
-        WordGroup(name: "Group1", wordList: [
-            Word(isLearned: false, onEnglish: "Kat", onRussian: "Кошечка"),
-            Word(isLearned: false, onEnglish: "Kat2", onRussian: "Кошечка2")
-        ]),
+    @Published private var modelWords = WordsToGo()
     
-        WordGroup(name: "Group2", wordList: [
-            Word(isLearned: false, onEnglish: "Dog", onRussian: "Собачка"),
-            Word(isLearned: false, onEnglish: "Home", onRussian: "Домик")
-        ])
-    ]
-    
-    @Published var currentWord: String = ""
-    @Published var showWord: Bool = false
-    
-    func searchWord(by engName: String) -> Word? {
-        var findingWord: Word!
-        for word in words {
-            if word.onEnglish == engName.uppercased() {
-                findingWord = word
-            }
-        }
-        return findingWord
+    var words: [Word] {
+        modelWords.wordsList
     }
+    
+    func saveWord(with englishName:  String, and russianName: String,
+                  imageUrl: String = "", isLearned: Bool = false, transcript: String = "") {
+        modelWords.saveWord(with: englishName, and: russianName)
+    }
+    
+    func deleteWord(at offset: IndexSet) {
+        modelWords.deleteWord(at: offset)
+    }
+    
+    
 }

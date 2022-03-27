@@ -17,18 +17,20 @@ struct Word: Codable {
 
 struct WordsToGo {
     private (set) var wordsList: [Word]
-    
-    static func getWord() -> Word {
-        return Word(
-            isLearned: false,
-            onEnglish: "House",
-            onRussian: "Дом, жилище",
-            transcription: "[home]",
-            imageUrl: "https://unsplash.com/photos/7pCFUybP_P8")
-    }
+    private let storageManager = StorageManager.shared
     
     init() {
-        wordsList = getWordsList()
+        wordsList = storageManager.getWordsList()
+    }
+    
+    private func searchWord(by engName: String) -> Word? {
+        var findingWord: Word!
+        for word in wordsList {
+            if word.onEnglish == engName.uppercased() {
+                findingWord = word
+            }
+        }
+        return findingWord
     }
     
     mutating func saveWord(
@@ -37,47 +39,30 @@ struct WordsToGo {
         imageUrl: String = "",
         isLearned: Bool = false,
         transcript: String = "") {
-        
-        if let indexWord = wordsList.firstIndex(where: {
-            $0.onEnglish == englishName
-        }) {
-            wordsList[indexWord].onRussian = russianName
-            wordsList[indexWord].onEnglish = englishName
-            wordsList[indexWord].imageUrl  = imageUrl
-            wordsList[indexWord].isLearned = isLearned
-            saveWordsList()
-        } else {
-            let newWord = Word(
-                isLearned: isLearned,
-                onEnglish: englishName,
-                onRussian: russianName,
-                transcription: transcript,
-                imageUrl: imageUrl)
-            wordsList.append(newWord)
-            saveWordsList()
-        }
-    }
-    
-    func saveWordsList() {
-        let encoder = JSONEncoder()
-        if let data = try? encoder.encode(wordsList) {
-            UserDefaults.standard.set(data, forKey: "words")
-        }
-    }
-    
-    mutating func getWordsList() -> [Word] {
-        if let wordsData = UserDefaults.standard.value(forKey: "words") {
-            let decoder = JSONDecoder()
             
-            if let words = try? decoder.decode([Word].self, from: wordsData as! Data) {
-                return words
+            if let indexWord = wordsList.firstIndex(where: {
+                $0.onEnglish == englishName
+            }) {
+                wordsList[indexWord].onRussian = russianName
+                wordsList[indexWord].onEnglish = englishName
+                wordsList[indexWord].imageUrl  = imageUrl
+                wordsList[indexWord].isLearned = isLearned
             } else {
-                return [Word]()
+                let newWord = Word(
+                    isLearned: isLearned,
+                    onEnglish: englishName,
+                    onRussian: russianName,
+                    transcription: transcript,
+                    imageUrl: imageUrl)
+                wordsList.append(newWord)
             }
-        }
+            storageManager.saveInStorage(wordsList: wordsList)
     }
     
-    
+    mutating func deleteWord(at offset: IndexSet) {
+        wordsList.remove(atOffsets: offset)
+        storageManager.saveInStorage(wordsList: wordsList)
+    }
 }
 
 

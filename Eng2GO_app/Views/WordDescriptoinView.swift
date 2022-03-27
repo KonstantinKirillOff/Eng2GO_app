@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WordDescriptoinView: View {
-    @EnvironmentObject var wordData: WordViewModel
+    let wordViewModel: WordViewModel
     
     @State private var engName = ""
     @State private var rusName = ""
@@ -25,7 +25,7 @@ struct WordDescriptoinView: View {
                 Image(systemName: "photo")
                     .resizable()
                     .frame(width: 200, height: 200)
-                    .foregroundColor(.black)            }
+                .foregroundColor(.black)            }
             Form {
                 TextField("new word", text: $engName)
                     .onAppear {
@@ -39,10 +39,10 @@ struct WordDescriptoinView: View {
                 TextField("перевод", text: $rusName)
                     .onAppear {
                         if rusName == "" {
-                            if let indexWord = self.wordData.words.firstIndex(where: {
+                            if let indexWord = self.wordViewModel.words.firstIndex(where: {
                                 $0.onEnglish == engName
                             }) {
-                                rusName = self.wordData.words[indexWord].onRussian
+                                rusName = self.wordViewModel.words[indexWord].onRussian
                             }
                         }
                     }
@@ -56,27 +56,14 @@ struct WordDescriptoinView: View {
                         }
                         Button(action: {
                             if engName != "" && rusName != "" {
-                                if let indexWord = self.wordData.words.firstIndex(where: {
+                                if let indexWord = self.wordViewModel.words.firstIndex(where: {
                                     $0.onEnglish == engName
                                 }) {
-                                    self.wordData.words.remove(at: indexWord)
-                                    
-                                    let newWord = Word(onEnglish: engName, onRussian: rusName)
-                                    self.wordData.words.insert(newWord, at: indexWord)
-            
-                                    let encoder = JSONEncoder()
-                                    if let data = try? encoder.encode(wordData.words) {
-                                        UserDefaults.standard.set(data, forKey: "words")
-                                    }
+                                    let IndSet = IndexSet(integer: indexWord)
+                                    wordViewModel.deleteWord(at: IndSet)
+                                    wordViewModel.saveWord(with: engName, and: rusName)
                                 } else {
-                                    let newWord = Word(onEnglish: engName, onRussian: rusName)
-                                    self.wordData.words.append(newWord)
-                                    
-                                    let encoder = JSONEncoder()
-                                    
-                                    if let data = try? encoder.encode(wordData.words) {
-                                        UserDefaults.standard.set(data, forKey: "words")
-                                    }
+                                    wordViewModel.saveWord(with: engName, and: rusName)
                                 }
                                 presentationMode.wrappedValue.dismiss()
                             } else {
@@ -92,13 +79,13 @@ struct WordDescriptoinView: View {
                     }
                 }
             }
-
+            
         }
     }
 }
 
 struct WordDescriptoinView_Previews: PreviewProvider {
     static var previews: some View {
-        WordDescriptoinView()
+        WordDescriptoinView(wordViewModel: WordViewModel())
     }
 }

@@ -13,14 +13,10 @@
 		B5D150E5278A00EF00C467AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5D150E4278A00EF00C467AA /* Preview Assets.xcassets */; };
 		B5D150EC278A012F00C467AA /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D150EB278A012F00C467AA /* WordModel.swift */; };
 		B5D150EE278A040400C467AA /* WordDescriptoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D150ED278A040400C467AA /* WordDescriptoinView.swift */; };
-		FF4E339427AFF42600A42F07 /* WordForTraningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4E339327AFF42600A42F07 /* WordForTraningView.swift */; };
+		FF3186A027F0ADD600978F72 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF31869F27F0ADD600978F72 /* StorageManager.swift */; };
 		FF74D43927A1239000C51519 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF74D43827A1239000C51519 /* SearchBarView.swift */; };
 		FF8675B327AFDCC500DB1F70 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */; };
-		FF8675B727AFDECB00DB1F70 /* WordGroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B627AFDECB00DB1F70 /* WordGroupListView.swift */; };
-		FF8675B927AFE39900DB1F70 /* EditWordGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8675B827AFE39900DB1F70 /* EditWordGroupView.swift */; };
-		FFB4724B27B975FA00AE3A22 /* WordsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */; };
 		FFB4724D27B9771600AE3A22 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB4724C27B9771600AE3A22 /* NetworkManager.swift */; };
-		FFE93A3127A066880075A979 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFE93A3027A066880075A979 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,14 +27,10 @@
 		B5D150E4278A00EF00C467AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5D150EB278A012F00C467AA /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		B5D150ED278A040400C467AA /* WordDescriptoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDescriptoinView.swift; sourceTree = "<group>"; };
-		FF4E339327AFF42600A42F07 /* WordForTraningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordForTraningView.swift; sourceTree = "<group>"; };
+		FF31869F27F0ADD600978F72 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FF74D43827A1239000C51519 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
-		FF8675B627AFDECB00DB1F70 /* WordGroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordGroupListView.swift; sourceTree = "<group>"; };
-		FF8675B827AFE39900DB1F70 /* EditWordGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordGroupView.swift; sourceTree = "<group>"; };
-		FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsListViewModel.swift; sourceTree = "<group>"; };
 		FFB4724C27B9771600AE3A22 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		FFE93A3027A066880075A979 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +47,6 @@
 		B5D150D1278A00ED00C467AA = {
 			isa = PBXGroup;
 			children = (
-				FFE93A3027A066880075A979 /* Launch Screen.storyboard */,
 				B5D150DC278A00ED00C467AA /* Eng2GO_app */,
 				B5D150DB278A00ED00C467AA /* Products */,
 			);
@@ -96,7 +87,6 @@
 			children = (
 				B5D150EB278A012F00C467AA /* WordModel.swift */,
 				FF8675B227AFDCC500DB1F70 /* WordViewModel.swift */,
-				FFB4724A27B975FA00AE3A22 /* WordsListViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -106,9 +96,6 @@
 			children = (
 				B5D150ED278A040400C467AA /* WordDescriptoinView.swift */,
 				FF74D43827A1239000C51519 /* SearchBarView.swift */,
-				FF8675B627AFDECB00DB1F70 /* WordGroupListView.swift */,
-				FF8675B827AFE39900DB1F70 /* EditWordGroupView.swift */,
-				FF4E339327AFF42600A42F07 /* WordForTraningView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,6 +103,7 @@
 		FFB4724E27B9773300AE3A22 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				FF31869F27F0ADD600978F72 /* StorageManager.swift */,
 				FFB4724C27B9771600AE3A22 /* NetworkManager.swift */,
 			);
 			path = Service;
@@ -179,7 +167,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE93A3127A066880075A979 /* Launch Screen.storyboard in Resources */,
 				B5D150E5278A00EF00C467AA /* Preview Assets.xcassets in Resources */,
 				B5D150E2278A00EF00C467AA /* Assets.xcassets in Resources */,
 			);
@@ -192,14 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF8675B727AFDECB00DB1F70 /* WordGroupListView.swift in Sources */,
 				FF8675B327AFDCC500DB1F70 /* WordViewModel.swift in Sources */,
+				FF3186A027F0ADD600978F72 /* StorageManager.swift in Sources */,
 				FF74D43927A1239000C51519 /* SearchBarView.swift in Sources */,
-				FFB4724B27B975FA00AE3A22 /* WordsListViewModel.swift in Sources */,
 				FFB4724D27B9771600AE3A22 /* NetworkManager.swift in Sources */,
 				B5D150E0278A00ED00C467AA /* ContentView.swift in Sources */,
-				FF4E339427AFF42600A42F07 /* WordForTraningView.swift in Sources */,
-				FF8675B927AFE39900DB1F70 /* EditWordGroupView.swift in Sources */,
 				B5D150DE278A00ED00C467AA /* Eng2GO_appApp.swift in Sources */,
 				B5D150EC278A012F00C467AA /* WordModel.swift in Sources */,
 				B5D150EE278A040400C467AA /* WordDescriptoinView.swift in Sources */,
@@ -338,7 +322,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -368,7 +351,6 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
