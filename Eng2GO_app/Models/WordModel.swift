@@ -12,7 +12,13 @@ struct Word: Codable {
     var onEnglish: String
     var onRussian: String
     var transcription = ""
-    var imageUrl = ""
+    var imageId = ""
+}
+
+struct Picture: Identifiable, Codable {
+    var id: String
+    var alt_description: String
+    var urls: [String : String]
 }
 
 struct WordsToGo {
@@ -36,7 +42,7 @@ struct WordsToGo {
     mutating func saveWord(
         with englishName:  String,
         and russianName: String,
-        imageUrl: String = "",
+        imageId: String = "",
         isLearned: Bool = false,
         transcript: String = "") {
             
@@ -45,7 +51,7 @@ struct WordsToGo {
             }) {
                 wordsList[indexWord].onRussian = russianName
                 wordsList[indexWord].onEnglish = englishName
-                wordsList[indexWord].imageUrl  = imageUrl
+                wordsList[indexWord].imageId  = imageId
                 wordsList[indexWord].isLearned = isLearned
             } else {
                 let newWord = Word(
@@ -53,7 +59,7 @@ struct WordsToGo {
                     onEnglish: englishName,
                     onRussian: russianName,
                     transcription: transcript,
-                    imageUrl: imageUrl)
+                    imageId: imageId)
                 wordsList.append(newWord)
             }
             storageManager.saveInStorage(wordsList: wordsList)
