@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct WordDescriptoinView: View {
     let wordViewModel: WordViewModel
