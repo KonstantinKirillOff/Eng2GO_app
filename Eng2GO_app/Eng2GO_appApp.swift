@@ -13,7 +13,8 @@ struct Eng2GO_appApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(wordViewModel: wordsApp)
+            //ContentView(wordViewModel: wordsApp)
+            WordView()
         }
     }
 }

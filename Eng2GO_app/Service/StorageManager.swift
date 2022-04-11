@@ -45,7 +45,7 @@ class StorageManager {
             onEnglish: "House",
             onRussian: "Дом, жилище",
             transcription: "[home]",
-            imageUrl: "https://unsplash.com/photos/7pCFUybP_P8")
+            imageURL: "https://unsplash.com/photos/7pCFUybP_P8")
     }
     
 }

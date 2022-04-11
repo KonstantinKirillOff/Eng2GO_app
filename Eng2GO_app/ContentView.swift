@@ -51,6 +51,7 @@ struct ContentView: View {
                     ForEach(searchResult, id: \.onEnglish) { word in
                         NavigationLink(destination: WordDescriptoinView(
                                                     wordViewModel: wordViewModel,
+                                                    initialImage: word.imageURL,
                                                     initialEngName: word.onEnglish,
                                                     initialRusName: word.onRussian)
                                                         .navigationBarBackButtonHidden(true)) {

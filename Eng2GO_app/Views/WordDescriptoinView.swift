@@ -6,36 +6,66 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct WordDescriptoinView: View {
     let wordViewModel: WordViewModel
+    @ObservedObject var pictureViewModel = PictureViewModel()
     
+    @State private var urlImage = ""
     @State private var engName = ""
     @State private var rusName = ""
     @State private var showAlert = false
     
     @Environment(\.presentationMode) var presentationMode
     
+    var initialImage = ""
     var initialEngName = ""
     var initialRusName = ""
     
     var body: some View {
         VStack {
-            ZStack() {
-                Image(systemName: "photo")
-                    .resizable()
-                    .frame(width: 200, height: 200)
-                .foregroundColor(.black)            }
+            //ZStack() {
+            if #available(iOS 15.0, *) {
+                AsyncImage(url: URL(string: urlImage)) { image in
+                    image
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                } placeholder: {
+                    Image(systemName: "xmark.shield")
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                        .foregroundColor(.black)
+                }
+            } else {
+                // Fallback on earlier versions
+            }
+                
+//                WebImage(url: URL(string: urlImage))
+//                    .resizable()
+//                    .frame(width: 200, height: 200)
+//                    .onAppear {
+//                        if initialImage != "" {
+//                            urlImage = initialImage
+//                        }
+//                    }
             Form {
-                TextField("new word", text: $engName)
-                    .onAppear {
-                        if initialEngName != "" {
-                            engName = initialEngName
+                if #available(iOS 15.0, *) {
+                    TextField("new word", text: $engName)
+                        .onAppear {
+                            if initialEngName != "" {
+                                engName = initialEngName
+                            }
+                            if initialRusName != "" {
+                                rusName = initialRusName
+                            }
                         }
-                        if initialRusName != "" {
-                            rusName = initialRusName
+                        .onSubmit {
+                            //getImagesUnSplash(for: engName)
                         }
-                    }
+                } else {
+                    // Fallback on earlier versions
+                }
                 TextField("перевод", text: $rusName)
                     .onAppear {
                         if rusName == "" {
@@ -82,6 +112,7 @@ struct WordDescriptoinView: View {
             
         }
     }
+
 }
 
 struct WordDescriptoinView_Previews: PreviewProvider {

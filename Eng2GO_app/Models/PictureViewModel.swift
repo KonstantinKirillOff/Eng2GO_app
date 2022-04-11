@@ -9,9 +9,13 @@ import Foundation
 
 class PictureViewModel: ObservableObject {
     private let key = "LUMG6YSLoGTass_HzRDzERd_dmrCMBSHpxqku6yl7P8"
-    @Published var photoArray: [Picture] = []
+    private var photoArray: [Picture] = []
+    
+    @Published var currentUrlImage = ""
     
     func getImagesUnSplash(for word: String) {
+        photoArray = []
+        
         let query = word.replacingOccurrences(of: " ", with: "%20")
         let url = "https://api.unsplash.com/search/photos?page=1&query=\(query)&client_id=\(key)"
         
@@ -25,13 +29,15 @@ class PictureViewModel: ObservableObject {
                         self.photoArray.append(photo)
                     }
                 }
+                self.currentUrlImage = self.photoArray[0].urls["thumb"]!
             } catch {
                 print(error.localizedDescription)
             }
         }.resume()
     }
     
-    func changeImage() {
-        
-    }
+//    func changeImage() {
+//        let newPhotoForWord =  photoArray.randomElement()
+//        return newPhotoForWord?.urls
+//    }
 }
