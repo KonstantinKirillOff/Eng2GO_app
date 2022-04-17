@@ -15,8 +15,8 @@ class WordViewModel: ObservableObject {
     }
     
     func saveWord(with englishName:  String, and russianName: String,
-                  imageUrl: String = "", isLearned: Bool = false, transcript: String = "") {
-        modelWords.saveWord(with: englishName, and: russianName)
+                  imageUrl: String, isLearned: Bool = false, transcript: String = "") {
+        modelWords.saveWord(with: englishName, and: russianName, imageURL: imageUrl)
     }
     
     func deleteWord(at offset: IndexSet) {

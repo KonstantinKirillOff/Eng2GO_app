@@ -15,15 +15,6 @@ struct Word: Codable {
     var imageURL = ""
 }
 
-struct Picture: Identifiable, Decodable {
-    var id: String
-    var description: String?
-    var urls: [String : String]
-}
-
-struct ResponsePicture: Decodable {
-    var results: [Picture]
-}
 
 struct WordsToGo {
     private (set) var wordsList: [Word]
@@ -33,20 +24,20 @@ struct WordsToGo {
         wordsList = storageManager.getWordsList()
     }
     
-    private func searchWord(by engName: String) -> Word? {
-        var findingWord: Word!
-        for word in wordsList {
-            if word.onEnglish == engName.uppercased() {
-                findingWord = word
-            }
-        }
-        return findingWord
-    }
+//    private func searchWord(by engName: String) -> Word? {
+//        var findingWord: Word!
+//        for word in wordsList {
+//            if word.onEnglish == engName.uppercased() {
+//                findingWord = word
+//            }
+//        }
+//        return findingWord
+//    }
     
     mutating func saveWord(
         with englishName:  String,
         and russianName: String,
-        imageURL: String = "",
+        imageURL: String,
         isLearned: Bool = false,
         transcript: String = "") {
             

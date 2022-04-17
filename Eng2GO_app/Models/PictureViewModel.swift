@@ -8,36 +8,41 @@
 import Foundation
 
 class PictureViewModel: ObservableObject {
-    private let key = "LUMG6YSLoGTass_HzRDzERd_dmrCMBSHpxqku6yl7P8"
-    private var photoArray: [Picture] = []
+    @Published var urlImage = ""
     
-    @Published var currentUrlImage = ""
+    private static let key = "LUMG6YSLoGTass_HzRDzERd_dmrCMBSHpxqku6yl7P8"
     
-    func getImagesUnSplash(for word: String) {
-        photoArray = []
+    private func getUnSplashImages(for wordOnEnglish: String) {
+        let query = wordOnEnglish.replacingOccurrences(of: " ", with: "%20")
         
-        let query = word.replacingOccurrences(of: " ", with: "%20")
-        let url = "https://api.unsplash.com/search/photos?page=1&query=\(query)&client_id=\(key)"
+        guard let url =
+                URL(string: "https://api.unsplash.com/search/photos?query=\(query)&client_id=\(PictureViewModel.key)")
+        else { return }
         
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: URL(string: url)!) { (data, _, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             do {
-                let json = try JSONDecoder().decode([Picture].self, from: data)
-                for photo in json {
-                    DispatchQueue.main.async {
-                        self.photoArray.append(photo)
+                let pictureData = try JSONDecoder().decode(ResponsePicture.self, from: data)
+                if pictureData.results.count > 0 {
+                    DispatchQueue.main.async { [self] in
+                        urlImage = pictureData.results.randomElement()!.urls["thumb"]!
                     }
                 }
-                self.currentUrlImage = self.photoArray[0].urls["thumb"]!
             } catch {
                 print(error.localizedDescription)
             }
         }.resume()
     }
     
-//    func changeImage() {
-//        let newPhotoForWord =  photoArray.randomElement()
-//        return newPhotoForWord?.urls
-//    }
+    func getImage(for wordOnEnglish: String, wordVM: WordViewModel) {
+        if let indexWord = wordVM.words.firstIndex(where: { $0.onEnglish == wordOnEnglish }) {
+            urlImage = wordVM.words[indexWord].imageURL
+        } else {
+            getUnSplashImages(for: wordOnEnglish)
+        }
+    }
+    
+    func changeImage(for wordOnEnglish: String) {
+        getUnSplashImages(for: wordOnEnglish)
+    }
 }

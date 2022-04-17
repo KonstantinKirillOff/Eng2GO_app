@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct Eng2GO_appApp: App {
     let wordsApp = WordViewModel()
+    let pictureVM = PictureViewModel()
     
     var body: some Scene {
         WindowGroup {
-            //ContentView(wordViewModel: wordsApp)
-            WordView()
+            ContentView(wordViewModel: wordsApp, pictureViewModel: pictureVM)
         }
     }
 }

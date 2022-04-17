@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var wordViewModel: WordViewModel
+    @ObservedObject var pictureViewModel: PictureViewModel
     
     @State private var showCancelButton = false
     @State private var searchText = ""
@@ -40,6 +41,7 @@ struct ContentView: View {
                     }
                     NavigationLink(destination:WordDescriptoinView(
                                                wordViewModel: wordViewModel,
+                                               pictureViewModel: pictureViewModel,
                                                initialEngName: searchText,
                                                initialRusName: "")
                                                     .navigationBarBackButtonHidden(true)) {
@@ -51,7 +53,7 @@ struct ContentView: View {
                     ForEach(searchResult, id: \.onEnglish) { word in
                         NavigationLink(destination: WordDescriptoinView(
                                                     wordViewModel: wordViewModel,
-                                                    initialImage: word.imageURL,
+                                                    pictureViewModel: pictureViewModel,
                                                     initialEngName: word.onEnglish,
                                                     initialRusName: word.onRussian)
                                                         .navigationBarBackButtonHidden(true)) {
@@ -73,7 +75,7 @@ struct ContentView: View {
     
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(wordViewModel: WordViewModel())
+        ContentView(wordViewModel: WordViewModel(), pictureViewModel: PictureViewModel())
     }
 }
 
