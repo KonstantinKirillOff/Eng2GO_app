@@ -39,21 +39,24 @@ struct ContentView: View {
                                 .font(.title)
                         }
                     }
-                    NavigationLink(destination:WordDescriptoinView(
-                                               wordViewModel: wordViewModel,
-                                               pictureViewModel: pictureViewModel,
-                                               initialEngName: searchText,
-                                               initialRusName: "")
-                                                    .navigationBarBackButtonHidden(true)) {
+                    
+                    if searchResult.count == 0 {
+                        NavigationLink(destination:WordDescriptoinView(
+                            wordViewModel: wordViewModel,
+                            initialUrl: "",
+                            initialEngName: searchText,
+                            initialRusName: "")
+                                        .navigationBarBackButtonHidden(true)) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title)
+                        }
                     }
                 }.padding(.horizontal)
                 List {
                     ForEach(searchResult, id: \.onEnglish) { word in
                         NavigationLink(destination: WordDescriptoinView(
                                                     wordViewModel: wordViewModel,
-                                                    pictureViewModel: pictureViewModel,
+                                                    initialUrl: word.imageURL,
                                                     initialEngName: word.onEnglish,
                                                     initialRusName: word.onRussian)
                                                         .navigationBarBackButtonHidden(true)) {
